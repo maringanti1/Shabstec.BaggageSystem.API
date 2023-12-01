@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Publisher xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ConfigData>
+    <BrokerSvcBusQueueName>devbixservicev19m1</BrokerSvcBusQueueName>
+    <BrokerSvcBusURL>Endpoint=sb://bix-servicebus-shabstec.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=AUv8qwoXzADWJepEKW635fixjhS8p0gHl+ASbAPhWdk=</BrokerSvcBusURL>
+    <RabbitMQHostSecretName>emirates.uksouth.azurecontainer.io</RabbitMQHostSecretName>
+    <RabbitMQPortSecretName>5672</RabbitMQPortSecretName>
+    <RabbitMQUsernameSecretName>EmiratesU</RabbitMQUsernameSecretName>
+    <RabbitMQPasswordSecretName>EmiratesP</RabbitMQPasswordSecretName>
+    <RabbitMQExchange>emirates</RabbitMQExchange>
+    <SubscribedQueueName>bixclientappqueue</SubscribedQueueName>
+    <SubscribedQueueEndPoint>Endpoint=sb://bix-servicebus-shabstec.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=AUv8qwoXzADWJepEKW635fixjhS8p0gHl+ASbAPhWdk=</SubscribedQueueEndPoint>
+  </ConfigData>
+  <TopicCodeData>
+    <Topics>
+      <Topic>
+        <TopicName>IA</TopicName>
+        <TopicHost>IA</TopicHost>
+        <TopicVersion>IA</TopicVersion>
+      </Topic>
+      <Topic>
+        <TopicName> BHR</TopicName>
+        <TopicHost> BHR</TopicHost>
+        <TopicVersion> BHR</TopicVersion>
+      </Topic>
+      <Topic>
+        <TopicName> QA</TopicName>
+        <TopicHost> QA</TopicHost>
+        <TopicVersion> QA</TopicVersion>
+      </Topic>
+      <Topic>
+        <TopicName> SA</TopicName>
+        <TopicHost> SA</TopicHost>
+        <TopicVersion> SA</TopicVersion>
+      </Topic>
+      <Topic>
+        <TopicName> HYB</TopicName>
+        <TopicHost> HYB</TopicHost>
+        <TopicVersion> HYB</TopicVersion>
+      </Topic>
+    </Topics>
+  </TopicCodeData>
+  <SubscriberTopics>
+    <SubTopics>
+      <Topic>
+        <TopicName>BHR</TopicName>
+        <TopicHost>BHR</TopicHost>
+        <TopicVersion>BHR</TopicVersion>
+      </Topic>
+    </SubTopics>
+  </SubscriberTopics>
+</Publisher>
