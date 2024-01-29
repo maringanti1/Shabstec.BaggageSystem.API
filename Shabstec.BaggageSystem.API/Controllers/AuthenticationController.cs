@@ -11,6 +11,8 @@ using System.Collections.Generic;
 using System;
 using static Microsoft.ApplicationInsights.MetricDimensionNames.TelemetryContext;
 using User = BlazorApp.API.Models.User;
+using System.Text;
+using Docker.DotNet;
 
 [ApiController]
 [Route("[controller]")]
@@ -69,10 +71,25 @@ public class UserController : ControllerBase
         return Ok(user);
     }
 
+    public static string DecodePassword(string encodedPassword, string key)
+    {
+        // Decode Base64 string to bytes
+        byte[] bytesToDecode = Convert.FromBase64String(encodedPassword);
+
+        // Convert bytes back to the combined string
+        string combinedString = Encoding.UTF8.GetString(bytesToDecode);
+
+        // Remove the key to get the original password
+        string originalPassword = combinedString.Substring(0, combinedString.Length - key.Length);
+
+        return originalPassword;
+    }
+
+
     [HttpPost("validate")]
     public async Task<IActionResult> ValidateUser([FromBody] Login credentials)
     {
-        _logger.LogInformation("ValidateUser started");
+        _logger.LogInformation("ValidateUser started");       
         var isValid = await cosmosDBService.ValidateUserAsync(credentials);
 
         if (isValid)
@@ -82,17 +99,33 @@ public class UserController : ControllerBase
 
         return BadRequest("Invalid user credentials");
     }
+    public static string EncodePassword(string password, string key)
+    {
+        // Combine password and key
+        string combinedString = password + key;
 
+        // Convert the combined string to bytes
+        byte[] bytesToEncode = Encoding.UTF8.GetBytes(combinedString);
+
+        // Encode the bytes in Base64
+        string encodedPassword = Convert.ToBase64String(bytesToEncode);
+
+        return encodedPassword;
+    }
     [HttpPost("Authenticate")]
     public async Task<IActionResult> Authenticate([FromBody] Login model)
     {
-        _logger.LogInformation("Authenticate started");
-        var user = await cosmosDBService.ValidateUserAsync(model);
-
+         _logger.LogInformation("Authenticate started");
+        string key = "randomKey123";
+        // Encode and save the password to the database
+        string encodedPassword = EncodePassword(model.Password, key);
+        model.Password = encodedPassword;
+        var user = await cosmosDBService.ValidateUserAsync(model); 
         if (user)
         {
-                        
-            return Ok(user);
+            var userData = await cosmosDBService.GetUserDetails(model);
+            
+            return Ok(userData);
         }
         return BadRequest(new { message = "Invalid username or password" });
         

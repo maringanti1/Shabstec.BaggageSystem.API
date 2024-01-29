@@ -1,0 +1,43 @@
+﻿<html>
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #ffffff;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        }
+        h1 {
+            color: #007acc;
+        }
+        .field-label {
+            font-weight: bold;
+        }
+        .consent-checkbox {
+            font-weight: bold;
+            color: green;
+        }
+    </style>
+</head>
+<body>
+   <div class='container'>
+    <h1>Shabstec Baggage Information Services</h1>
+    <p>Hello {{FirstName}} {{LastName}},</p>
+    <br/>
+    <p>Thanks for the registration. We appreciate your interest in our Baggage Information Service and Subscription.</p>
+    <p>Our dedicated team is currently reviewing your information. Rest assured, we will get in touch with you shortly to provide further details and guide you through the next steps.</p>
+    <br/>
+    <p>In the meantime, feel free to explore more about our services on our website:</p>
+    <p><a href="https://shabstec.com/" target="_blank">Shabstec Baggage Information Services</a></p>
+    <br/>
+    <p>If you have any immediate questions or concerns, you can reach us at <a href="mailto:shabbir.girach@shabstec.com">shabbir.girach@shabstec.com</a>.</p>
+    <br/>
+    <p>Thank you for choosing Shabstec!</p>
+</div>
+</body>
+</html> 

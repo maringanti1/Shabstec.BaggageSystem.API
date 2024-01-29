@@ -6,8 +6,10 @@ namespace BlazorApp.API.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Username { get; set; }
+        public string Organisation { get; set; }
+        
         public string Token { get; set; }
         public bool IsDeleting { get; set; }
-        public string ServiceID { get; set; } // 'id' property is required
+        public string entity { get; set; } // 'id' property is required
     }
 }

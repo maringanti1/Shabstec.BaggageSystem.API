@@ -1,6 +1,6 @@
 ﻿namespace BlazorApp.API.Services
-{ 
-    using BlazorApp.API.Models; 
+{
+    using BlazorApp.API.Models;
     using Microsoft.Azure.Cosmos;
     using Microsoft.Azure.Cosmos.Serialization.HybridRow;
     using Microsoft.Extensions.Configuration;
@@ -11,17 +11,18 @@
     using System.ComponentModel;
     using System.Linq;
     using System.Net;
+    using System.Text;
     using System.Threading.Tasks;
     using static Microsoft.ApplicationInsights.MetricDimensionNames.TelemetryContext;
     using Container = Microsoft.Azure.Cosmos.Container;
     using User = Models.User;
 
     public class CosmosDBService
-    { 
+    {
         private readonly CosmosDbSettings _cosmosDbSettings;
         private readonly EmailConfiguration _emailConfig;
         private readonly ILogger<UserController> _logger;
-        public CosmosDBService(ILogger<UserController> logger, 
+        public CosmosDBService(ILogger<UserController> logger,
             IOptions<CosmosDbSettings> cosmosDbSettings,
             IOptions<EmailConfiguration> emailconfig)
         {
@@ -37,11 +38,13 @@
             try
             {
                 user.id = System.Guid.NewGuid().ToString();
-                user.ServiceID = "Registration";
-                ItemResponse<Registration> response = await container.CreateItemAsync(user, new PartitionKey(user.ServiceID));
+                user.entity = "Registration";
+                ItemResponse<Registration> response = await container.CreateItemAsync(user, new PartitionKey(user.entity));
                 _logger.LogInformation($"Registerd user with id: {response.Resource.Username}");
                 EmailManager emailManager = new EmailManager(_emailConfig);
                 emailManager.SendEmail(user);
+
+                emailManager.SendUserEmail(user);
                 //Send an email
             }
             catch (Exception ex)
@@ -56,11 +59,13 @@
             var database = cosmosClient.GetDatabase(_cosmosDbSettings.DatabaseName);
             var container = database.GetContainer(_cosmosDbSettings.ContainerName);
             try
-            {  
+            {
                 user.id = System.Guid.NewGuid().ToString();
-                user.ServiceID = "User";
-                ItemResponse<AddUser> response = await container.CreateItemAsync(user, new PartitionKey(user.ServiceID));
+                user.entity = "User";
+                ItemResponse<AddUser> response = await container.CreateItemAsync(user, new PartitionKey(user.entity));
                 _logger.LogInformation($"Created user with id: {response.Resource.Username}");
+                EmailManager emailManager = new EmailManager(_emailConfig);
+                emailManager.SendNewUserLoginCredentialsEmail(user);
             }
             catch (Exception ex)
             {
@@ -90,17 +95,54 @@
             }
         }
 
-        public async Task<bool> ValidateUserAsync(Login credentials)
+        public async Task<User> GetUserDetails(Login credentials)
         {
             var cosmosClient = new CosmosClient(_cosmosDbSettings.Endpoint, _cosmosDbSettings.Key);
             var database = cosmosClient.GetDatabase(_cosmosDbSettings.DatabaseName);
             var container = database.GetContainer(_cosmosDbSettings.ContainerName);
+
             try
             {
-                var query = new QueryDefinition("SELECT * FROM c WHERE c.Username = @username AND c.Password = @password AND c.ServiceID=@serviceid")
+                var query = new QueryDefinition("SELECT * FROM c WHERE c.Username = @username AND c.Password = @password AND c.entity = @entity")
                     .WithParameter("@username", credentials.Username)
                     .WithParameter("@password", credentials.Password)
-                    .WithParameter("@serviceid", "User");
+                    .WithParameter("@entity", "User");
+
+                var iterator = container.GetItemQueryIterator<User>(query);
+
+                while (iterator.HasMoreResults)
+                {
+                    var response = await iterator.ReadNextAsync();
+
+                    // Assuming you are expecting only one result, you can return the first item
+                    if (response.Any())
+                    {
+                        return response.First();
+                    }
+                }
+
+                // If no results are found, you might want to return null or handle it accordingly
+                return null;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogInformation($"Error validating user: {ex.Message}");
+                throw;
+            }
+        }
+        
+
+        public async Task<bool> ValidateUserAsync(Login credentials)
+        {
+            var cosmosClient = new CosmosClient(_cosmosDbSettings.Endpoint, _cosmosDbSettings.Key);
+            var database = cosmosClient.GetDatabase(_cosmosDbSettings.DatabaseName);
+            var container = database.GetContainer(_cosmosDbSettings.ContainerName);            
+            try
+            {
+                var query = new QueryDefinition("SELECT * FROM c WHERE c.Username = @username AND c.Password = @password AND c.entity=@entity")
+                    .WithParameter("@username", credentials.Username)
+                    .WithParameter("@password", credentials.Password)
+                    .WithParameter("@entity", "User");
 
                 var iterator = container.GetItemQueryIterator<AddUser>(query);
                 var results = await iterator.ReadNextAsync();
@@ -121,7 +163,7 @@
             var container = database.GetContainer(_cosmosDbSettings.ContainerName);
             try
             {
-                var query = new QueryDefinition("SELECT * FROM c  where c.ServiceID='User'");
+                var query = new QueryDefinition("SELECT * FROM c  where c.entity='User'");
                 var iterator = container.GetItemQueryIterator<User>(query);
 
                 var users = new List<User>();
@@ -129,7 +171,7 @@
                 while (iterator.HasMoreResults)
                 {
                     var response = await iterator.ReadNextAsync();
-                    users.AddRange(response.ToList()); 
+                    users.AddRange(response.ToList());
                 }
 
                 return users;

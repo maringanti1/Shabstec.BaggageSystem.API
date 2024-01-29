@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8" ?> 
+<MessageQueue xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<Publisher>
+		<Host>Endpoint=sb://shabstec.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=HniWx8RS4sQpMqAEr9XnVfRG4DEOY+EMtek5ygUTyZ4=</Host>
+		<Topic>publisher</Topic>
+	</Publisher> 
+	<Subscriber>
+		<Host>Endpoint=sb://shabstec.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=HniWx8RS4sQpMqAEr9XnVfRG4DEOY+EMtek5ygUTyZ4=</Host>
+		<Topic>subscriber</Topic>
+	</Subscriber>
+</MessageQueue>

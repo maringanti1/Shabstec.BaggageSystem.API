@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+	  <AspNetCoreHostingModel>OutOfProcess</AspNetCoreHostingModel>
   </PropertyGroup>
 
   <ItemGroup>
@@ -16,9 +17,40 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Template\AckEmail.txt" />
+    <None Remove="Template\Countries.xml" />
+    <None Remove="Template\LoginEmail.txt" />
+    <None Remove="Template\LookupCodes.xlsx" />
+    <None Remove="Template\RegistrationEmail.txt" />
+    <None Remove="Template\ServiceBusQueueConfiguration.xml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Template\AckEmail.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Template\Countries.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Template\LoginEmail.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Template\LookupCodes.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Template\RegistrationEmail.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Template\ServiceBusQueueConfiguration.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Azure.Containers.ContainerRegistry" Version="1.1.0" />
     <PackageReference Include="Azure.Identity" Version="1.10.3" />
     <PackageReference Include="Docker.DotNet" Version="3.125.15" />
+    <PackageReference Include="EPPlus" Version="7.0.3" />
     <PackageReference Include="Microsoft.Azure.Cosmos" Version="3.35.4" />
     <PackageReference Include="Microsoft.Azure.Management.Fluent" Version="1.38.1" />
     <PackageReference Include="Microsoft.Azure.Management.ResourceManager.Fluent" Version="1.38.1" />

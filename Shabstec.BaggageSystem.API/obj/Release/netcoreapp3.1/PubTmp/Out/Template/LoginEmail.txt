@@ -1,0 +1,47 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #ffffff;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        }
+        h1 {
+            color: #007acc;
+        }
+        .field-label {
+            font-weight: bold;
+        }
+        .consent-checkbox {
+            font-weight: bold;
+            color: green;
+        }
+    </style>
+    <title>Login Details</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Login Details</h1>
+        <p>Hello {{FirstName}},</p>
+        <p>Please find your login details below:</p>
+        <p class="field-label">First Name: {{FirstName}}</p>
+        <p class="field-label">Last Name: {{LastName}}</p>
+        <p class="field-label">Email: <a href="mailto:{{Email}}">{{Email}}</a></p>
+        <p class="field-label">Temporary Password: {{Password}}</p>
+        <p class="field-label">Please login: <a href="https://bixbaginationlaunch.azurewebsites.net/login">https://bixbaginationlaunch.azurewebsites.net/login</a></p>
+        <br/>
+        <p>Thank you!</p>
+    </div>
+</body>
+</html>

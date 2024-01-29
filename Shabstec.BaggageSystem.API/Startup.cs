@@ -47,7 +47,7 @@ namespace BlazorApp.API
             {
                 c.SwaggerDoc("v1", new OpenApiInfo
                 {
-                    Title = "BixBagginationAPI",
+                    Title = "Bagnition Swagger Endpoints",
                     Version = "v1"
                 });
             });
@@ -78,7 +78,7 @@ namespace BlazorApp.API
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "BixBagginationAPI");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "BagnitionAPI");
             });
 
         }

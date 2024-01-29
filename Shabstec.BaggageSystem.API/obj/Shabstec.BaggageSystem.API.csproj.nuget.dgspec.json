@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Shabbstech\\BlazorApp.API\\Shabstec.BaggageSystem.API.csproj": {}
+    "C:\\GITRepos\\Shabstec.BaggageSystem.API\\Shabstec.BaggageSystem.API\\Shabstec.BaggageSystem.API.csproj": {}
   },
   "projects": {
-    "C:\\Shabbstech\\BlazorApp.API\\Shabstec.BaggageSystem.API.csproj": {
+    "C:\\GITRepos\\Shabstec.BaggageSystem.API\\Shabstec.BaggageSystem.API\\Shabstec.BaggageSystem.API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Shabbstech\\BlazorApp.API\\Shabstec.BaggageSystem.API.csproj",
+        "projectUniqueName": "C:\\GITRepos\\Shabstec.BaggageSystem.API\\Shabstec.BaggageSystem.API\\Shabstec.BaggageSystem.API.csproj",
         "projectName": "Shabstec.BaggageSystem.API",
-        "projectPath": "C:\\Shabbstech\\BlazorApp.API\\Shabstec.BaggageSystem.API.csproj",
+        "projectPath": "C:\\GITRepos\\Shabstec.BaggageSystem.API\\Shabstec.BaggageSystem.API\\Shabstec.BaggageSystem.API.csproj",
         "packagesPath": "C:\\Users\\laxmi\\.nuget\\packages\\",
-        "outputPath": "C:\\Shabbstech\\BlazorApp.API\\obj\\",
+        "outputPath": "C:\\GITRepos\\Shabstec.BaggageSystem.API\\Shabstec.BaggageSystem.API\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\laxmi\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -51,6 +51,10 @@
             "Docker.DotNet": {
               "target": "Package",
               "version": "[3.125.15, )"
+            },
+            "EPPlus": {
+              "target": "Package",
+              "version": "[7.0.3, )"
             },
             "Microsoft.Azure.Cosmos": {
               "target": "Package",

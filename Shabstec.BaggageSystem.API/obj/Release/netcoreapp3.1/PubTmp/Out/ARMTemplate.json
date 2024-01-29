@@ -42,6 +42,10 @@
                 {
                   "name": "RABBITMQ_DEFAULT_VHOST",
                   "value": "test"
+                },
+                {
+                  "name": "Organisation",
+                  "value": "{Organisation}"
                 }
               ]
             }
@@ -55,11 +59,19 @@
                   "cpu": 0.5,
                   "memoryInGB": 1.5
                 }
-              }, 
+              },
               "environmentVariables": [
                 {
-                  "name": "XMLFILE",
-                  "value": "{XMLFILE}"
+                  "name": "PublishTo",
+                  "value": "{PublishTo}"
+                },
+                {
+                  "name": "SubscribeTo",
+                  "value": "{SubscribeTo}"
+                },
+                {
+                  "name": "Organisation",
+                  "value": "{Organisation}"
                 }
               ]
             }
@@ -76,8 +88,16 @@
               },
               "environmentVariables": [
                 {
-                  "name": "XMLFILE",
-                  "value": "{XMLFILE}"
+                  "name": "PublishTo",
+                  "value": "{PublishTo}"
+                },
+                {
+                  "name": "SubscribeTo",
+                  "value": "{SubscribeTo}"
+                },
+                {
+                  "name": "Organisation",
+                  "value": "{Organisation}"
                 }
               ]
             }

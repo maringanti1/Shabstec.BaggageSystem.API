@@ -1,0 +1,54 @@
+﻿<html>
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #ffffff;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        }
+        h1 {
+            color: #007acc;
+        }
+        .field-label {
+            font-weight: bold;
+        }
+        .consent-checkbox {
+            font-weight: bold;
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    <div class='container'>
+        <h1>Request for Baggage Information Service and Subscription</h1>
+        <p>Hello Team,</p>
+        <p>I am a first-time user and I would like to request information about baggage services. Please find my details below:</p>
+        <p class='field-label'>First Name: {{FirstName}}</p>
+        <p class='field-label'>Last Name: {{LastName}}</p>
+        <p class='field-label'>Email: <a href='mailto:{{Email}}'>{{Email}}</a></p>
+        <p class='field-label'>Phone Number: {{PhoneNumber}}</p>
+        <p class='field-label'>Office Phone Number: {{OfficePhoneNumber}}</p>
+        <p class='field-label'>Job Title: {{JobTitle}}</p>
+        <p class='field-label'>Company Type: {{CompanyType}}</p>
+        <p class='field-label'>Company Name: {{CompanyName}}</p> 
+        <p class='field-label'>Airport: {{Airport}}</p>
+        <p class='field-label'>Country/Territory: {{Country}}</p> 
+        <p class='field-label'>Strategic Partner: {{StrategicPartner}}</p>        
+        <br/>
+        <p>Please provide details about the baggage services available and how I can utilize them.</p>
+        <p>I am also interested in subscribing to your service. Please provide more details about the subscription options and how I can sign up.</p>                      
+        <p class='field-label'>
+            <input type='checkbox' class='consent-checkbox' checked disabled>
+            I consent to the processing of my personal information in accordance with IATA's Privacy Policy.
+        </p>
+        
+        <p>Thank you!</p> 
+    </div>
+</body>
+</html> 
